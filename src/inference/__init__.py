@@ -1,0 +1,3 @@
+"""
+Inference Module for OceanEmbed
+"""
