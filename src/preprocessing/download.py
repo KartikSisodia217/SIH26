@@ -35,16 +35,18 @@ def download_era5(year: int, month: int, output_dir: str):
     return output_path
 
 import subprocess
+import calendar
 
 def download_glorys(year: int, month: int, output_dir: str):
     """
     Downloads GLORYS12V1 3D ocean temperature for the target.
-    Product ID: cmems_mod_glo_phy_my_0.083_P1D-m
+    Product ID: cmems_mod_glo_phy_my_0.083deg_P1D-m
     """
     os.makedirs(output_dir, exist_ok=True)
     # Define time bounds for the month
     start_date = f"{year}-{month:02d}-01"
-    end_date = f"{year}-{month:02d}-31" # Copernicus subset gracefully handles invalid end days like Feb 31
+    last_day = calendar.monthrange(year, month)[1]
+    end_date = f"{year}-{month:02d}-{last_day}"
     
     output_filename = f"glorys_{year}_{month:02d}.nc"
     
@@ -70,7 +72,8 @@ def download_satellite_data(year: int, month: int, output_dir: str):
     """
     os.makedirs(output_dir, exist_ok=True)
     start_date = f"{year}-{month:02d}-01"
-    end_date = f"{year}-{month:02d}-31"
+    last_day = calendar.monthrange(year, month)[1]
+    end_date = f"{year}-{month:02d}-{last_day}"
     
     print(f"Downloading OSTIA SST for {start_date}...")
     subprocess.run([
