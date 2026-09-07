@@ -13,7 +13,7 @@ class Config:
     # Dataset
     seq_len = 5
     grid_shape = (101, 241)
-    batch_size = 1
+    batch_size = 4
     num_workers = 0  # 0 for local dummy, can be increased for Kaggle
     prefetch_factor = None
     
@@ -24,9 +24,6 @@ class Config:
     stats_file = os.path.join(base_dir, "normalization_stats_train.json")
     checkpoint_dir = os.path.join(base_dir, "checkpoints")
     model_config_path = os.path.join(base_dir, "model_config.json")
-    best_model_path = os.path.join(checkpoint_dir, "best_model.pt")
-    last_model_path = os.path.join(checkpoint_dir, "last_model.pt")
-    training_state_path = os.path.join(checkpoint_dir, "training_state.pt")
     
     # Training
     seed = 42
@@ -39,3 +36,4 @@ class Config:
     device = "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")
     mixed_precision = False
     log_freq = 1
+    checkpoint_interval = 100

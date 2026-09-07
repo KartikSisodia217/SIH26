@@ -54,6 +54,7 @@ venv.bak/
 
 # Additional cleanup
 data/
+checkpoints/
 *.zarr/
 .DS_Store
 .ipynb_checkpoints/
