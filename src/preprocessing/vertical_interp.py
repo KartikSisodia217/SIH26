@@ -21,11 +21,13 @@ def extrapolate_surface_temp(glorys_ds: xr.Dataset, temp_var_name="thetao"):
     
     t_0 = t_0_494 + (0 - z1) * (t_1_541 - t_0_494) / (z2 - z1)
     
-    # Expand dimension to concatenate
     t_0 = t_0.expand_dims(depth=[0.0])
     
+    ds_0 = t_0.to_dataset(name=temp_var_name)
     # Concatenate along depth
-    glorys_ds_extended = xr.concat([t_0, glorys_ds], dim="depth")
+    # Since glorys_ds might have other variables, we just extract temp_var_name
+    glorys_ds_only = glorys_ds[[temp_var_name]]
+    glorys_ds_extended = xr.concat([ds_0, glorys_ds_only], dim="depth")
     return glorys_ds_extended
 
 def interpolate_to_target_depths(glorys_ds: xr.Dataset, temp_var_name="thetao"):

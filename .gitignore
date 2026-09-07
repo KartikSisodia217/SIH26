@@ -51,3 +51,9 @@ venv.bak/
 .idea/
 *.swp
 *.swo
+
+# Additional cleanup
+data/
+*.zarr/
+.DS_Store
+.ipynb_checkpoints/
