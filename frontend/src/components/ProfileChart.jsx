@@ -5,9 +5,12 @@ function ProfileChart({ location, profileData }) {
         temperature: profileData.temperatures[index],
     })) ?? []
 
+    const targetDepths = [0, 50, 100, 150, 200, 300, 500, 700, 1000]
+    const tableData = data.filter(d => targetDepths.includes(d.depth))
+
     return (
-        <div className="rounded-[24px] border border-black/5 bg-white shadow-[0_4px_24px_rgba(0,0,0,0.03)] p-8">
-            <div className="flex justify-between items-end mb-8">
+        <div className="rounded-[24px] border border-black/5 bg-white shadow-[0_4px_24px_rgba(0,0,0,0.03)] p-8 flex flex-col">
+            <div className="flex justify-between items-end mb-6">
                 <h3 className="text-[11px] uppercase tracking-widest text-[#1b0624]/40 font-medium">
                     Vertical Profile
                 </h3>
@@ -18,12 +21,21 @@ function ProfileChart({ location, profileData }) {
                 )}
             </div>
 
-            <div className="h-64">
+            <div className="h-48 mb-8">
                 <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={data} layout="vertical" margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                    <LineChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                         <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.05)" horizontal={true} vertical={false} />
                         
                         <XAxis
+                            type="number"
+                            dataKey="depth"
+                            stroke="rgba(0,0,0,0.1)"
+                            tick={{ fill: 'rgba(27,6,36,0.4)', fontSize: 11, fontFamily: 'monospace' }}
+                            tickLine={false}
+                            axisLine={false}
+                        />
+
+                        <YAxis
                             type="number"
                             dataKey="temperature"
                             stroke="rgba(0,0,0,0.1)"
@@ -31,17 +43,6 @@ function ProfileChart({ location, profileData }) {
                             tickLine={false}
                             axisLine={false}
                             domain={['dataMin - 1', 'dataMax + 1']}
-                            orientation="top"
-                        />
-
-                        <YAxis
-                            type="number"
-                            dataKey="depth"
-                            stroke="rgba(0,0,0,0.1)"
-                            tick={{ fill: 'rgba(27,6,36,0.4)', fontSize: 11, fontFamily: 'monospace' }}
-                            tickLine={false}
-                            axisLine={false}
-                            reversed={true}
                         />
 
                         <Tooltip 
@@ -61,6 +62,20 @@ function ProfileChart({ location, profileData }) {
                         />
                     </LineChart>
                 </ResponsiveContainer>
+            </div>
+
+            <div>
+                <h4 className="text-[11px] uppercase tracking-widest text-[#1b0624]/40 font-medium mb-3">
+                    Temperature by Depth
+                </h4>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-2">
+                    {tableData.map((row) => (
+                        <div key={row.depth} className="flex justify-between items-center text-[12px] font-mono border-b border-black/5 py-1">
+                            <span className="text-[#1b0624]/50">{row.depth}m</span>
+                            <span className="text-[#1b0624] font-medium">{row.temperature.toFixed(1)}°C</span>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     )
