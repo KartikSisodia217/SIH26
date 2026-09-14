@@ -69,7 +69,12 @@ function Dashboard() {
             activeDate
         )
             .then((data) => {
-                setProfileData(data)
+                setProfileData({
+                    ...data,
+                    depths: data.depths_m,
+                    temperatures: data.temperatures_c,
+                    d26: data.d26_depth_m
+                })
             })
             .catch((error) => {
                 console.error("Profile request failed:", error)
@@ -89,7 +94,7 @@ function Dashboard() {
 
         getSlice(selectedDepth, activeDate)
             .then((data) => {
-                setSliceData(data)
+                setSliceData(data.temperatures_2d)
             })
             .catch((error) => {
                 console.error("Slice request failed:", error)
@@ -217,7 +222,7 @@ function Dashboard() {
 
                         {/* D26 */}
                         <div className="mt-auto">
-                            <D26Card />
+                            <D26Card d26={profileData?.d26} />
                         </div>
 
                     </aside>
