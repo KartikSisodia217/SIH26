@@ -1,13 +1,4 @@
-import {
-    LineChart,
-    Line,
-    XAxis,
-    YAxis,
-    CartesianGrid,
-    Tooltip,
-    ResponsiveContainer,
-} from "recharts"
-
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts"
 function ProfileChart({ location, profileData }) {
     const mockData = [
         { depth: 0, temperature: 28.4 },
@@ -32,48 +23,58 @@ function ProfileChart({ location, profileData }) {
     })) ?? mockData
 
     return (
-        <div className="mt-6 rounded-xl border border-slate-800 bg-slate-950 p-4">
-            <h3 className="mb-4 text-sm font-semibold text-white">
-                Temperature Profile
-            </h3>
-
-            {location && (
-                <p className="mb-3 text-xs text-slate-400">
-                    {location.latitude.toFixed(2)}°N,{" "}
-                    {location.longitude.toFixed(2)}°E
-                </p>
-            )}
+        <div className="rounded-[24px] border border-black/5 bg-white shadow-[0_4px_24px_rgba(0,0,0,0.03)] p-8">
+            <div className="flex justify-between items-end mb-8">
+                <h3 className="text-[11px] uppercase tracking-widest text-[#1b0624]/40 font-medium">
+                    Vertical Profile
+                </h3>
+                {location && (
+                    <p className="text-[13px] font-mono text-[#1b0624]/40">
+                        {location.latitude.toFixed(2)}°, {location.longitude.toFixed(2)}°
+                    </p>
+                )}
+            </div>
 
             <div className="h-64">
                 <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={data}>
-                        <CartesianGrid strokeDasharray="3 3" />
-
+                    <LineChart data={data} layout="vertical" margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.05)" horizontal={true} vertical={false} />
+                        
                         <XAxis
-                            dataKey="depth"
-                            label={{
-                                value: "Depth (m)",
-                                position: "insideBottom",
-                                offset: -5,
-                            }}
+                            type="number"
+                            dataKey="temperature"
+                            stroke="rgba(0,0,0,0.1)"
+                            tick={{ fill: 'rgba(27,6,36,0.4)', fontSize: 11, fontFamily: 'monospace' }}
+                            tickLine={false}
+                            axisLine={false}
+                            domain={['dataMin - 1', 'dataMax + 1']}
+                            orientation="top"
                         />
 
                         <YAxis
-                            label={{
-                                value: "Temperature (°C)",
-                                angle: -90,
-                                position: "insideLeft",
-                            }}
+                            type="number"
+                            dataKey="depth"
+                            stroke="rgba(0,0,0,0.1)"
+                            tick={{ fill: 'rgba(27,6,36,0.4)', fontSize: 11, fontFamily: 'monospace' }}
+                            tickLine={false}
+                            axisLine={false}
+                            reversed={true}
                         />
 
-                        <Tooltip />
+                        <Tooltip 
+                            contentStyle={{ backgroundColor: '#fff', border: '1px solid rgba(0,0,0,0.05)', borderRadius: '12px', fontSize: '12px', boxShadow: '0 4px 24px rgba(0,0,0,0.06)' }}
+                            itemStyle={{ color: '#1b0624' }}
+                            formatter={(value, name) => [value + '°C', name === 'temperature' ? 'Temperature' : name]}
+                            labelFormatter={(label) => 'Depth: ' + label + 'm'}
+                        />
 
                         <Line
                             type="monotone"
                             dataKey="temperature"
-                            stroke="#22d3ee"
+                            stroke="#1b0624"
                             strokeWidth={2}
                             dot={false}
+                            activeDot={{ r: 4, fill: '#1b0624', stroke: '#fff', strokeWidth: 2 }}
                         />
                     </LineChart>
                 </ResponsiveContainer>
@@ -81,5 +82,4 @@ function ProfileChart({ location, profileData }) {
         </div>
     )
 }
-
 export default ProfileChart
