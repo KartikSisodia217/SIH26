@@ -1,8 +1,8 @@
 const API_URL = "http://localhost:8000"
 
-export async function getProfile(latitude, longitude) {
+export async function getProfile(latitude, longitude, date = "latest") {
     const response = await fetch(
-        `${API_URL}/predict/profile?latitude=${latitude}&longitude=${longitude}`
+        `${API_URL}/predict/profile?latitude=${latitude}&longitude=${longitude}&date=${date}`
     )
 
     if (!response.ok) {
@@ -12,9 +12,9 @@ export async function getProfile(latitude, longitude) {
     return response.json()
 }
 
-export async function getSlice(depth) {
+export async function getSlice(depth, date = "latest") {
     const response = await fetch(
-        `${API_URL}/predict/slice?depth_m=${depth}&date=latest`
+        `${API_URL}/predict/slice?depth_m=${depth}&date=${date}`
     )
 
     if (!response.ok) {

@@ -2,26 +2,24 @@ function D26Card() {
     const d26 = 62.5
 
     return (
-        <div className="mt-6 rounded-xl border border-slate-800 bg-slate-950 p-4">
-            <p className="text-sm text-slate-400">
-                D26 Isotherm Depth
+        <div className="rounded-[24px] border border-black/5 bg-white shadow-[0_4px_24px_rgba(0,0,0,0.03)] p-8">
+            <p className="text-[11px] uppercase tracking-widest text-[#1b0624]/40 font-medium mb-6">
+                D26 Isotherm
             </p>
 
-            <div className="mt-2 flex items-baseline gap-2">
-                <span className="text-3xl font-bold text-cyan-400">
+            <div className="flex items-baseline gap-2 mb-4">
+                <span className="text-[56px] font-light tracking-[-0.04em] text-[#1b0624] leading-none">
                     {d26}
                 </span>
-
-                <span className="text-sm text-slate-400">
-                    meters
+                <span className="text-[20px] text-[#1b0624]/40 font-light">
+                    m
                 </span>
             </div>
 
-            <p className="mt-2 text-xs text-slate-500">
-                Depth where temperature reaches 26°C
+            <p className="text-[14px] text-[#1b0624]/60 font-light leading-relaxed">
+                Depth intercept where oceanic temperature reaches exactly 26°C.
             </p>
         </div>
     )
 }
-
 export default D26Card
