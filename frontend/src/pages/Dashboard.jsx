@@ -48,10 +48,10 @@ function Dashboard() {
     const handleRunModel = () => {
         setIsPredicting(true)
         setActiveDate(inputDate)
-        // Simulate a small delay for UI feedback
+        // Simulate a delay for UI feedback
         setTimeout(() => {
             setIsPredicting(false)
-        }, 600)
+        }, 2000)
     }
 
     // Get temperature profile when a location is selected or date changes
@@ -101,7 +101,23 @@ function Dashboard() {
     }, [depthIndex, activeDate])
 
     return (
-        <div className="min-h-screen bg-[#f7f7f5] font-sans text-[#1b0624] selection:bg-[#1b0624] selection:text-white pb-20">
+        <div className="min-h-screen bg-[#f7f7f5] font-sans text-[#1b0624] selection:bg-[#1b0624] selection:text-white pb-20 relative">
+            
+            {/* FULL SCREEN LOADING OVERLAY */}
+            {isPredicting && (
+                <div className="fixed inset-0 z-[9999] bg-[#f7f7f5]/80 backdrop-blur-sm flex items-center justify-center">
+                    <div className="bg-white px-12 py-10 rounded-[32px] shadow-[0_8px_32px_rgba(0,0,0,0.06)] border border-black/5 flex flex-col items-center gap-6">
+                        <div className="w-10 h-10 rounded-full border-[3px] border-black/5 border-t-[#1b0624] animate-spin"></div>
+                        <p className="text-[14px] font-bold tracking-widest uppercase text-[#1b0624]">
+                            Loading...
+                        </p>
+                        <p className="text-[12px] font-light text-[#1b0624]/60 max-w-[200px] text-center leading-relaxed">
+                            Generating deep ocean temperature predictions.
+                        </p>
+                    </div>
+                </div>
+            )}
+
             <Header 
                 selectedDate={inputDate} 
                 onDateChange={setInputDate} 

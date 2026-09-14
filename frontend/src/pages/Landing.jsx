@@ -194,7 +194,58 @@ const Landing = ({ onLaunch }) => {
         </div>
       </div>
 
-      {/* 5. FOOTER (Deepest layer, dark background) */}
+      {/* 5. USE CASES */}
+      <section className="w-full bg-[#0a192f] text-white py-24 md:py-32 px-6 md:px-[60px] relative z-10 border-t border-white/5">
+        <div className="max-w-[1200px] mx-auto">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }} 
+            whileInView={{ opacity: 1, y: 0 }} 
+            viewport={{ once: true, margin: "-10%" }} 
+            transition={{ duration: 0.8 }}
+            className="mb-16 md:mb-24"
+          >
+            <h2 className="text-[32px] md:text-[48px] font-medium tracking-[-0.04em] mb-4 leading-[1.1]">
+              Where OceanEmbed can be used
+            </h2>
+            <p className="text-[18px] md:text-[20px] text-white/50 font-light max-w-[600px]">
+              Our deep ocean temperature predictions power critical research, industry applications, and climate monitoring systems worldwide.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {[
+              { emoji: "🌪️", title: "Cyclone & storm research" },
+              { emoji: "🔥", title: "Marine heatwave detection" },
+              { emoji: "🪸", title: "Coral reef & bleaching monitoring" },
+              { emoji: "🐟", title: "Fisheries & fish habitat mapping" },
+              { emoji: "🌊", title: "Upwelling & ocean productivity" },
+              { emoji: "🌀", title: "Eddy & ocean-current research" },
+              { emoji: "🌍", title: "Climate & ocean warming studies" },
+              { emoji: "🚢", title: "Marine & underwater operations" },
+              { emoji: "🔬", title: "Oceanographic research & modelling" },
+              { emoji: "🤖", title: "Future ocean forecasting & AI systems" },
+            ].map((useCase, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-5%" }}
+                transition={{ duration: 0.5, delay: idx * 0.05 }}
+                className="group p-8 rounded-[24px] bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/10 transition-all duration-300 backdrop-blur-sm flex items-start gap-4 cursor-default"
+              >
+                <div className="text-[28px] leading-none grayscale group-hover:grayscale-0 transition-all duration-500 opacity-70 group-hover:opacity-100 scale-95 group-hover:scale-110">
+                  {useCase.emoji}
+                </div>
+                <h3 className="text-[16px] md:text-[18px] font-light tracking-tight text-white/80 group-hover:text-white transition-colors leading-[1.3] mt-1">
+                  {useCase.title}
+                </h3>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 6. FOOTER (Deepest layer, dark background) */}
       <footer className="w-full px-6 md:px-[60px] py-[80px] flex flex-col md:flex-row justify-between items-start md:items-center text-[14px] text-white/40 bg-[#0a192f] relative z-10 border-t border-white/5">
         <div className="flex items-center gap-2 font-medium text-white/70 mb-4 md:mb-0">
           <span>✱</span> OCEANEMBED
