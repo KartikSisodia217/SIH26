@@ -2,7 +2,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 function ProfileChart({ location, profileData }) {
     const data = profileData?.depths?.map((depth, index) => ({
         depth,
-        temperature: profileData.temperatures[index],
+        temperature: profileData?.temperatures?.[index] ?? null,
     })) ?? []
 
     const targetDepths = [0, 50, 100, 150, 200, 300, 500, 700, 1000]
@@ -72,7 +72,9 @@ function ProfileChart({ location, profileData }) {
                     {tableData.map((row) => (
                         <div key={row.depth} className="flex justify-between items-center text-[12px] font-mono border-b border-black/5 py-1">
                             <span className="text-[#1b0624]/50">{row.depth}m</span>
-                            <span className="text-[#1b0624] font-medium">{row.temperature.toFixed(1)}°C</span>
+                            <span className="text-[#1b0624] font-medium">
+                                {typeof row.temperature === 'number' ? `${row.temperature.toFixed(1)}°C` : 'N/A'}
+                            </span>
                         </div>
                     ))}
                 </div>
