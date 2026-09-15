@@ -13,19 +13,19 @@ const Landing = ({ onLaunch }) => {
   });
 
   // Timings for Layer 1 (Left) - Make it visible immediately!
-  const l1Opacity = useTransform(scrollYProgress, [0, 0.2, 0.3], [1, 1, 0]);
-  const l1Y = useTransform(scrollYProgress, [0, 0.2, 0.3], [0, 0, -60]);
-  const l1Scale = useTransform(scrollYProgress, [0, 0.2], [1, 1]);
+  const l1Opacity = useTransform(scrollYProgress, [0, 0.2, 0.25, 1], [1, 1, 0, 0]);
+  const l1Y = useTransform(scrollYProgress, [0, 0.2, 0.25, 1], [0, 0, -60, -60]);
+  const l1Scale = useTransform(scrollYProgress, [0, 0.2, 1], [1, 1, 1]);
 
   // Timings for Layer 2 (Right)
-  const l2Opacity = useTransform(scrollYProgress, [0.2, 0.35, 0.55, 0.65], [0, 1, 1, 0]);
-  const l2Y = useTransform(scrollYProgress, [0.2, 0.35, 0.55, 0.65], [60, 0, 0, -60]);
-  const l2Scale = useTransform(scrollYProgress, [0.2, 0.35], [0.9, 1]);
+  const l2Opacity = useTransform(scrollYProgress, [0, 0.25, 0.4, 0.55, 0.65, 1], [0, 0, 1, 1, 0, 0]);
+  const l2Y = useTransform(scrollYProgress, [0, 0.25, 0.4, 0.55, 0.65, 1], [60, 60, 0, 0, -60, -60]);
+  const l2Scale = useTransform(scrollYProgress, [0, 0.25, 0.4, 1], [0.9, 0.9, 1, 1]);
 
   // Timings for Layer 3 (Center)
-  const l3Opacity = useTransform(scrollYProgress, [0.55, 0.7, 1], [0, 1, 1]);
-  const l3Y = useTransform(scrollYProgress, [0.55, 0.7], [60, 0]);
-  const l3Scale = useTransform(scrollYProgress, [0.55, 0.7], [0.9, 1]);
+  const l3Opacity = useTransform(scrollYProgress, [0, 0.55, 0.7, 1], [0, 0, 1, 1]);
+  const l3Y = useTransform(scrollYProgress, [0, 0.55, 0.7, 1], [60, 60, 0, 0]);
+  const l3Scale = useTransform(scrollYProgress, [0, 0.55, 0.7, 1], [0.9, 0.9, 1, 1]);
 
   return (
     <div 
